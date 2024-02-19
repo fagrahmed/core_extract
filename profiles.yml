@@ -1,0 +1,69 @@
+config:
+  partial_parse: true
+  printer_width: 120
+  send_anonymous_usage_stats: false
+  use_colors: true
+
+dbt_axis_core:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: 10.10.93.2
+      port: 5432  # optional
+      database: Ssot # optional, should be same as schema
+      schema: dbt
+      user: postgres
+      password: postgres
+    prod:
+      type: type
+      server: [server/host]
+      port: [port]  # optional
+      database: [schema] # optional, should be same as schema
+      schema: [schema]
+      username: [username]
+      password: [password]
+      driver: MySQL ODBC 8.0 ANSI Driver
+dbt_trial:
+  target: maria_dev
+  outputs:
+    maria_dev:
+      type: mariadb
+      host: 194.163.140.33
+      user: root
+      password: mariadb
+      port: 3305
+      schema: maria_dbt
+      ssl_disabled: true
+    prod:
+      type: mariadb
+      server: [server/host]
+      port: [port]  # optional
+      database: [schema] # optional, should be same as schema
+      schema: [schema]
+      username: [username]
+      password: [password]
+      driver: MySQL ODBC 8.0 ANSI Driver
+  target: maria_dev
+
+data_migration:
+  target: dev
+  outputs:
+    dev:
+      type: mariadb
+      server: [server/host]
+      port: [port]  # optional
+      database: [schema] # optional, should be same as schema
+      schema: [schema]
+      username: [username]
+      password: [password]
+      driver: MySQL ODBC 8.0 ANSI Driver
+    prod:
+      type: mariadb
+      server: [server/host]
+      port: [port]  # optional
+      database: [schema] # optional, should be same as schema
+      schema: [schema]
+      username: [username]
+      password: [password]
+      driver: MySQL ODBC 8.0 ANSI Driver

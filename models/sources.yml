@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: axis_core
+    database: Ssot
+    tables:
+      - name: walletdetails
+      - name: transactiondetails
