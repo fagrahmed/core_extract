@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: axis_core
-    database: Ssot
+    # database: Ssot
     tables:
       - name: walletdetails
       - name: transactiondetails
