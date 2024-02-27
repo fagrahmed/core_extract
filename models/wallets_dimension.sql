@@ -4,7 +4,6 @@
 
 SELECT
     walletId,
-    walletnumber,
     (createdat::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS wallet_createdat_utc2,
     (lastmodified::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS wallet_modifiedat_utc2,
     walletStatus as wallet_status,
