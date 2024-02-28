@@ -5,6 +5,7 @@
 SELECT
     txndetailsid,
     walletdetailsid,
+    clientdetails,
     (createdat::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS transaction_createdat_utc2,
     (lastmodified::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS transaction_modifiedat_utc2,
     txntype,
