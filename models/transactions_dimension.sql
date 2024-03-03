@@ -14,6 +14,10 @@ SELECT
     transactiondomain,
     transactionaction,
     interchangeaction,
+    interchangeamount::float as interchange_amount,
+    servicefees_aibyte_transform::float as service_fees,
+    txnrequestedamount_aibyte_transform::float as amount,
+    hasservicefees
 
     (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') as loaddate,
     null::timestamptz as expdate,
