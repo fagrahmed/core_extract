@@ -17,6 +17,8 @@ SELECT
     
     wallettype as wallet_type,
     walletStatus as wallet_status,
+    walletprofileid as profileid,
+    partnerid,
     
 
     (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') as loaddate,
