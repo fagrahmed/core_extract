@@ -19,6 +19,8 @@ SELECT
     txnrequestedamount_aibyte_transform::float as amount,
     walletbalancebefore_aibyte_transform::float as balance_before,
     walletbalanceafter_aibyte_transform::float as balance_after,
+    walletactualbalancebefore_aibyte_transform as actual_balance_before,
+    walletactualbalanceafter_aibyte_transform as actual_balance_after,
     hasservicefees,
     transactionreference,
     isreversedflag,
