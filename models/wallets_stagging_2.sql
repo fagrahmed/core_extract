@@ -2,7 +2,8 @@
 {{ config(
     materialized='incremental',
     unique_key= ['walletid', 'walletnumber'],
-    on_schema_change='create'
+    on_schema_change='create',
+    pre_hook='TRUNCATE TABLE {{ this }}'
 )}}
 
 {% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'wallets_dimension')" %}
