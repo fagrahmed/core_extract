@@ -2,8 +2,19 @@ version: 2
 
 sources:
   - name: axis_core
-    # database: Ssot
     tables:
       - name: walletdetails
       - name: transactiondetails
       - name: walletprofiles
+      - name: wallet_temp
+      
+
+  - name: dbt-dimensions
+    tables:
+      - name: transactions_dimension
+      - name: inc_final
+      - name: inc_stagging
+      - name: inc_stagging_3 
+      - name: wallets_stagging
+      - name: wallets_stagging_2
+      - name: wallets_dimension
