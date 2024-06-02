@@ -2,8 +2,7 @@
 {{ config(
     materialized='incremental',
     unique_key= ['walletid', 'walletnumber'],
-    on_schema_change='create',
-    pre_hook='TRUNCATE TABLE {{ this }}'
+    on_schema_change='create'
 )}}
 
 {% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'wallets_dimension')" %}
@@ -14,7 +13,7 @@
 
 with update_old as (
     SELECT
-        stg.unique_id AS unique_id,
+        stg.id AS id,
         CASE
             WHEN final.hash_column IS NOT NULL AND final.hash_column = stg.hash_column AND final.operation = 'insert' THEN 'update'
             ELSE 'exp'
@@ -89,40 +88,18 @@ with update_old as (
         END AS partnerid,
         (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate  
 
-    FROM {{ source('dbt-dimensions', 'wallets_stagging') }} stg
+    FROM {{ source('dbt-dimensions', 'stg_wallets') }} stg
     JOIN {{ source('dbt-dimensions', 'wallets_dimension')}} final
         ON stg.walletid = final.walletid AND stg.walletnumber = final.walletnumber
     WHERE final.hash_column is not null and final.operation != 'exp'
+        AND stg.loaddate > final.loaddate
 )
 
 SELECT * from update_old
 
 {% else %}
 
-SELECT
-
-    stg.unique_id AS unique_id,
-    stg.operation AS operation,
-    stg.currentflag AS currentflag,
-    stg.expdate AS expdate,
-    stg.walletid AS walletid,
-    stg.walletnumber AS walletnumber,
-    stg.hash_column AS hash_column,
-    stg.wallet_createdat_utc2 AS wallet_createdat_utc2,
-    stg.wallet_modifiedat_utc2 AS wallet_modifiedat_utc2,
-    stg.wallet_suspendedat_utc2 AS wallet_suspendedat_utc2,
-    stg.wallet_unsuspendedat_utc2 AS wallet_unsuspendedat_utc2,
-    stg.wallet_unregisteredat_utc2 AS wallet_unregisteredat_utc2,
-    stg.wallet_activatedat_utc2 AS wallet_activatedat_utc2,
-    stg.wallet_reactivatedat_utc2 AS wallet_reactivatedat_utc2,
-    stg.wallet_lasttxnts_utc2 AS wallet_lasttxnts_utc2,
-    stg.wallet_type AS wallet_type,
-    stg.wallet_status AS wallet_status,
-    stg.profileid AS profileid,
-    stg.partnerid AS partnerid,
-    (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate
-
-FROM {{ source('dbt-dimensions', 'wallets_stagging') }} stg
+SELECT *
+FROM {{ source('dbt-dimensions', 'stg_wallets') }} stg
 WHERE stg.loaddate > '2050-01-01'::timestamptz
 {% endif %}
-

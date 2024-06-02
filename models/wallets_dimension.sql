@@ -5,22 +5,22 @@
         materialized="incremental",
         unique_key= "hash_column",
         post_hook="
-            DROP TABLE IF EXISTS wallets_stagging;
-            DROP TABLE IF EXISTS wallets_stagging_2;
+            DROP TABLE IF EXISTS stg_wallets;
+            DROP TABLE IF EXISTS stg_wallets_2;
             "
     )
 }}
 
 with step_1 as (
     select stg.*
-    from {{ ref("wallets_stagging") }} stg 
-    left join {{ ref("wallets_stagging_2")}} stg2 on stg.hash_column = stg2.hash_column
+    from {{ ref("stg_wallets") }} stg 
+    left join {{ ref("stg_wallets_2")}} stg2 on stg.hash_column = stg2.hash_column
     where stg2.hash_column is null
 
     union 
 
     select *
-    from {{ref("wallets_stagging_2")}}
+    from {{ref("stg_wallets_2")}}
 )
 
 {%if is_incremental() %}
@@ -30,8 +30,8 @@ with step_1 as (
         new_records.*
     from step_1 as new_records
     left join {{this}} as old_records
-        on new_records.unique_id = old_records.unique_id
-    where old_records.unique_id is null
+        on new_records.id = old_records.id
+    where old_records.id is null
 
 )
 {% endif %}
