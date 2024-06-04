@@ -16,7 +16,7 @@
 
 
 SELECT
-    md5(walletid || '-' || now()::text) AS id,
+    md5(random()::text || '-' || now()::text ) AS id,
     'insert' AS operation,
     true AS currentflag,
     null::timestamptz AS expdate,
