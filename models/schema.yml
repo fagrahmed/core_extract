@@ -1,0 +1,159 @@
+models:
+  - name: stg_wallets
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: id
+        data_type: text
+        constraints:
+          - type: not_null
+          - type: primary_key
+      - name: currentflag
+        data_type: BOOLEAN
+      - name: expdate
+        data_type: TIMESTAMPTZ
+      - name: hash_column
+        data_type: TEXT
+      - name: loaddate
+        data_type: TIMESTAMP
+      - name: operation
+        data_type: TEXT
+      - name: partnerid
+        data_type: TEXT
+      - name: profileid
+        data_type: TEXT
+      - name: wallet_activatedat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_createdat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_lasttxnts_utc2
+        data_type: TIMESTAMP
+      - name: wallet_modifiedat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_reactivatedat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_status
+        data_type: TEXT
+      - name: wallet_suspendedat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_type
+        data_type: TEXT
+      - name: wallet_unregisteredat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_unsuspendedat_utc2
+        data_type: TIMESTAMP
+      - name: walletid
+        data_type: TEXT
+      - name: walletnumber
+        data_type: TEXT
+
+  - name: wallets_dimension
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: id
+        data_type: text
+        constraints:
+          - type: not_null
+          - type: primary_key
+      - name: currentflag
+        data_type: BOOLEAN
+      - name: expdate
+        data_type: TIMESTAMPTZ
+      - name: hash_column
+        data_type: TEXT
+      - name: loaddate
+        data_type: TIMESTAMP
+      - name: operation
+        data_type: TEXT
+      - name: partnerid
+        data_type: TEXT
+      - name: profileid
+        data_type: TEXT
+      - name: wallet_activatedat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_createdat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_lasttxnts_utc2
+        data_type: TIMESTAMP
+      - name: wallet_modifiedat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_reactivatedat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_status
+        data_type: TEXT
+      - name: wallet_suspendedat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_type
+        data_type: TEXT
+      - name: wallet_unregisteredat_utc2
+        data_type: TIMESTAMP
+      - name: wallet_unsuspendedat_utc2
+        data_type: TIMESTAMP
+      - name: walletid
+        data_type: TEXT
+      - name: walletnumber
+        data_type: TEXT 
+          
+  - name: transactions_dimension
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: id
+        data_type: text
+        constraints:
+          - type: not_null
+          - type: primary_key
+      - name: actual_balance_after
+        data_type: TEXT
+      - name: actual_balance_before
+        data_type: TEXT
+      - name: amount
+        data_type: FLOAT
+      - name: balance_after
+        data_type: FLOAT
+      - name: balance_before
+        data_type: FLOAT
+      - name: clientdetails
+        data_type: JSONB
+      - name: currentflag
+        data_type: BOOLEAN
+      - name: expdate
+        data_type: TIMESTAMPTZ
+      - name: hasservicefees
+        data_type: BOOLEAN
+      - name: interchange_amount
+        data_type: FLOAT
+      - name: interchangeaction
+        data_type: TEXT
+      - name: isreversedflag
+        data_type: BOOLEAN
+      - name: loaddate
+        data_type: TIMESTAMP
+      - name: operation
+        data_type: TEXT
+      - name: service_fees
+        data_type: FLOAT
+      - name: transaction_createdat_utc2
+        data_type: TIMESTAMP
+      - name: transaction_modifiedat_utc2
+        data_type: TIMESTAMP
+      - name: transactionaction
+        data_type: TEXT
+      - name: transactionchannel
+        data_type: TEXT
+      - name: transactiondomain
+        data_type: TEXT
+      - name: transactionreference
+        data_type: TEXT
+      - name: transactionstatus
+        data_type: TEXT
+      - name: txndetailsid
+        data_type: TEXT
+      - name: txntype
+        data_type: TEXT
+      - name: walletdetailsid
+        data_type: TEXT
