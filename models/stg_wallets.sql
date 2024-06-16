@@ -29,7 +29,7 @@ SELECT
             lastmodified_text, 
             now_text
         ]
-    ) }} AS id,
+    )::text }} AS id,
     'insert' AS operation,
     'insert' AS operation,
     true AS currentflag,
