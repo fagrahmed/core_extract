@@ -1,4 +1,4 @@
-{ config(
+{{ config(
     materialized='incremental',
     unique_key= ['walletid', 'walletnumber'],
     on_schema_change='append_new_columns'
