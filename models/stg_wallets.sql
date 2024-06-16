@@ -20,16 +20,12 @@
 {% set walletnumber_coalesced = "COALESCE(walletnumber, '')" %}
 {% set lastmodified_text = "COALESCE(lastmodified::text, '')" %}
 {% set now_text = "now()::text" %}
+    
+CREATE SEQUENCE stg_wallets_seq;
+
 
 SELECT
-    {{ generate_surrogate_key( [
-            random_text, 
-            walletid_coalesced, 
-            walletnumber_coalesced, 
-            lastmodified_text, 
-            now_text
-        ]
-    ) }}::text AS id,
+    nextval('stg_wallets_seq')::text AS id,
     'insert' AS operation,
     'insert' AS operation,
     true AS currentflag,
