@@ -16,7 +16,9 @@
 
 
 SELECT
-    md5(random()::text || '-' || COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, '') || '-' || now()::text) AS id,
+    {{ dbt_utils.generate_surrogate_key(
+    random()::text, COALESCE(walletid, ''), COALESCE(walletnumber, ''), COALESCE(lastmodified::text, ''), now()::text) 
+    }} AS id,
     'insert' AS operation,
     true AS currentflag,
     null::timestamptz AS expdate,
