@@ -15,17 +15,8 @@
 {% set stg_table_exists = stg_table_exists_result.rows[0][0] if stg_table_exists_result and stg_table_exists_result.rows else False %}
 
 
-{% set random_text = "random()::text" %}
-{% set walletid_coalesced = "COALESCE(walletid, '')" %}
-{% set walletnumber_coalesced = "COALESCE(walletnumber, '')" %}
-{% set lastmodified_text = "COALESCE(lastmodified::text, '')" %}
-{% set now_text = "now()::text" %}
-    
-CREATE SEQUENCE stg_wallets_seq;
-
-
 SELECT
-    nextval('stg_wallets_seq')::text AS id,
+    md5( COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, '') || '-' || (now()::timestamptz)::text || '-' || random()::text) AS id,
     'insert' AS operation,
     'insert' AS operation,
     true AS currentflag,
