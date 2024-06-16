@@ -22,7 +22,13 @@
 {% set now_text = "now()::text" %}
 
 SELECT
-    {{ dbt_utils.generate_surrogate_key( random_text, walletid_coalesced, walletnumber_coalesced, lastmodified_text, now_text
+    {{ generate_surrogate_key( [
+            random_text, 
+            walletid_coalesced, 
+            walletnumber_coalesced, 
+            lastmodified_text, 
+            now_text
+        ]
     ) }} AS id,
     'insert' AS operation,
     'insert' AS operation,
