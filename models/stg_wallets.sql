@@ -15,14 +15,13 @@
 {% set stg_table_exists = stg_table_exists_result.rows[0][0] if stg_table_exists_result and stg_table_exists_result.rows else False %}
 
 
-{% set random_text = random() | string %}
 {% set walletid_coalesced = COALESCE(walletid, '') %}
 {% set walletnumber_coalesced = COALESCE(walletnumber, '') %}
 {% set lastmodified_text = COALESCE(lastmodified | string, '') %}
 {% set now_text = now() | string %}
 
 SELECT
-    {{ dbt_utils.generate_surrogate_key( random_text, walletid_coalesced, walletnumber_coalesced, lastmodified_text, now_text
+    {{ dbt_utils.generate_surrogate_key( walletid_coalesced, walletnumber_coalesced, lastmodified_text, now_text
     ) }} AS id,
     'insert' AS operation,
     'insert' AS operation,
