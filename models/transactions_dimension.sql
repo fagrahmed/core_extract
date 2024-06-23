@@ -36,7 +36,12 @@ SELECT
     hasservicefees,
     transactionreference,
     isreversedflag,
-    (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate
+    (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate,
+    CASE
+        WHEN txntype NOT LIKE '%FEES' OR txntype = 'TransactionTypes_CREATE-VCN_FEES' THEN false
+        ELSE true
+    END AS is_fees
+    
 
 
 FROM {{ source('axis_core', 'transactiondetails')}} src
