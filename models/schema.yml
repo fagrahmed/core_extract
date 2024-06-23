@@ -155,6 +155,8 @@ models:
         data_type: TEXT
       - name: isreversedflag
         data_type: BOOLEAN
+      - name: is_fees
+        data_type: BOOLEAN
       - name: loaddate
         data_type: TIMESTAMP
       - name: operation
