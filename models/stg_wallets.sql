@@ -20,6 +20,10 @@ SELECT
     ]) }} AS id,
     md5( COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, '') || '-' || (now()::timestamptz)::text || '-' || random()::text)
     AS random_now,
+    md5( COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, ''))
+    AS no_random_now,
+    md5( random()::text) AS random,
+    md5((now()::timestamptz)::text) AS now,
     'insert' AS operation,
     true AS currentflag,
     null::timestamptz AS expdate,
