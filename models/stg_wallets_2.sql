@@ -14,6 +14,10 @@
 with update_old as (
     SELECT
         stg.id AS id,
+        stg.random_now as random_now,
+        stg.no_random_now as no_random_now,
+        stg.random as random,
+        stg.now as now,
         CASE
             WHEN final.hash_column IS NOT NULL AND final.hash_column = stg.hash_column AND final.operation = 'insert' THEN 'update'
             ELSE 'exp'
