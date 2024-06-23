@@ -18,6 +18,8 @@ SELECT
         'COALESCE(lastmodified::text, \'\')',
         'now()::text'
     ]) }} AS id,
+    md5( COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, '') || '-' || (now()::timestamptz)::text || '-' || random()::text)
+    AS random_now,
     'insert' AS operation,
     true AS currentflag,
     null::timestamptz AS expdate,
