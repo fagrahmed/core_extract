@@ -12,12 +12,8 @@
 
 
 SELECT
-    {{ dbt_utils.generate_surrogate_key([
-        'COALESCE(walletid, \'\')',
-        'COALESCE(walletnumber, \'\')',
-        'COALESCE(lastmodified::text, \'\')',
-        'now()::text'
-    ]) }} AS id,
+    md5( COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, '') || '-' || (now()::timestamptz)::text || '-' || random()::text)
+    AS id,
     md5( COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, '') || '-' || (now()::timestamptz)::text || '-' || random()::text)
     AS random_now,
     md5( COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, ''))
