@@ -64,6 +64,10 @@ models:
       - name: walletnumber
         data_type: TEXT
 
+  - name: stg_wallets_2
+    depends_on:
+      - ref('stg_wallets')
+      
   - name: wallets_dimension
     config:
       contract:
@@ -183,3 +187,4 @@ models:
         data_type: TEXT
       - name: walletdetailsid
         data_type: TEXT
+        
