@@ -105,6 +105,6 @@ SELECT * from update_old
 {% else %}
 
 SELECT *
-FROM {{ source('dbt-dimensions', 'stg_wallets') }} stg
+FROM {{ ref('stg_wallets') }} stg
 WHERE stg.loaddate > '2050-01-01'::timestamptz
 {% endif %}
