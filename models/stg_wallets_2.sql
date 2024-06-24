@@ -2,6 +2,7 @@
 {{ config(
     materialized='incremental',
     unique_key= ['walletid', 'walletnumber'],
+    depends_on=['stg_wallets'],
     on_schema_change='create'
 )}}
 
