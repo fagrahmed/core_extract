@@ -44,7 +44,7 @@ SELECT
     
 
 
-FROM {{ source('axis_core', 'transactiondetails')}} src
+FROM {{ source('axis_core', '_airbyte_raw_transactiondetails')}} src
 
 {% if is_incremental() and table_exists %}
     WHERE src._airbyte_emitted_at > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'transactions_dimension') }}), '1900-01-01'::timestamp)
