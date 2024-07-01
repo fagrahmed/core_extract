@@ -46,7 +46,7 @@ SELECT
     partnerid AS partnerid,
     (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate
 FROM
-    {{ source('axis_core', 'walletdetails') }} src
+    {{ source('axis_core', '_airbyte_raw_walletdetails') }} src
 {% if is_incremental() and table_exists and stg_table_exists %}
     WHERE src._airbyte_emitted_at > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'wallets_dimension') }}), '1900-01-01'::timestamp)
 {% endif %}
