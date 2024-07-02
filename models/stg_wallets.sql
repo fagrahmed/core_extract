@@ -21,8 +21,8 @@ SELECT
     'insert' AS operation,
     true AS currentflag,
     null::timestamptz AS expdate,
-    _airbyte_data->>'walletid' AS walletid,
-    _airbyte_data->>'walletnumber' AS walletnumber,
+    COALESCE(_airbyte_data->>'walletid', null) AS walletid,
+    COALESCE(_airbyte_data->>'walletnumber', null) AS walletnumber,
     md5(
         COALESCE(_airbyte_data->>'walletid', '') || '::' || 
         COALESCE(_airbyte_data->>'walletnumber', '') || '::' || 
@@ -40,16 +40,16 @@ SELECT
     ) AS hash_column,
     ((_airbyte_data->>'createdat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS wallet_createdat_utc2,
     ((_airbyte_data->>'lastmodified')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS wallet_modifiedat_utc2,
-    ((_airbyte_data->>'suspendedat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS wallet_suspendedat_utc2,
-    ((_airbyte_data->>'unsuspendedat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS wallet_unsuspendedat_utc2,
-    ((_airbyte_data->>'unregisteredat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS wallet_unregisteredat_utc2,
-    ((_airbyte_data->>'activatedat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS wallet_activatedat_utc2,
-    ((_airbyte_data->>'reactivatedat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS wallet_reactivatedat_utc2,
-    ((_airbyte_data->>'lasttxnts')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS wallet_lasttxnts_utc2,
-    _airbyte_data->>'wallettype' AS wallet_type,
-    _airbyte_data->>'walletStatus' AS wallet_status,
-    _airbyte_data->>'walletprofileid' AS profileid,
-    _airbyte_data->>'partnerid' AS partnerid,
+    (coalesce((_airbyte_data->>'suspendedat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours'), null) AS wallet_suspendedat_utc2,
+    (coalesce((_airbyte_data->>'unsuspendedat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours'), null) AS wallet_unsuspendedat_utc2,
+    (coalesce((_airbyte_data->>'unregisteredat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours'), null) AS wallet_unregisteredat_utc2,
+    (coalesce((_airbyte_data->>'activatedat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours'), null) AS wallet_activatedat_utc2,
+    (coalesce((_airbyte_data->>'reactivatedat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours'), null) AS wallet_reactivatedat_utc2,
+    (coalesce((_airbyte_data->>'lasttxnts')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours'), null) AS wallet_lasttxnts_utc2,
+    COALESCE(_airbyte_data->>'wallettype', null) AS wallet_type,
+    COALESCE(_airbyte_data->>'walletStatus', null) AS wallet_status,
+    COALESCE(_airbyte_data->>'walletprofileid', null) AS profileid,
+    COALESCE(_airbyte_data->>'partnerid', null) AS partnerid,
     (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate
 FROM
     {{ source('axis_core', '_airbyte_raw_walletdetails') }} src
