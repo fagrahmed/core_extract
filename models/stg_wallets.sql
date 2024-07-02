@@ -12,7 +12,7 @@
 
 
 SELECT
-    md5( COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, '') || '-' || (now()::timestamptz)::text)
+    md5( COALESCE(_airbyte_data->'walletid', '') || '-' || COALESCE(_airbyte_data->'walletnumber', '') || '-' || COALESCE(_airbyte_data->'lastmodified'::text, '') || '-' || (now()::timestamptz)::text)
     AS id,
     md5( COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, '') || '-' || (now()::timestamptz)::text || '-' || random()::text)
     AS random_now,
