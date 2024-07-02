@@ -1,6 +1,8 @@
-{{ config(materialized='incremental',
+{{ config(
+    materialized='incremental',
     unique_key= ['txndetailsid'],
-    on_schema_change='fail') }}
+    on_schema_change='fail'
+)}}
 
 {% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'transactions_dimension')" %}
 {% set table_exists_result = run_query(table_exists_query) %}
@@ -11,7 +13,7 @@ SELECT
         random()::text || '-' || 
         COALESCE(_airbyte_data->>'txndetailsid', '') || '-' || 
         COALESCE(_airbyte_data->>'walletdetailsid', '') || '-' || 
-        COALESCE(_airbyte_data->>'lastmodified'::text, '') || '-' || 
+        COALESCE((_airbyte_data->>'lastmodified')::text, '') || '-' || 
         now()::text
     ) AS id,
     'insert' AS operation,
@@ -20,8 +22,8 @@ SELECT
     _airbyte_data->>'txndetailsid' AS txndetailsid,
     _airbyte_data->>'walletdetailsid' AS walletdetailsid,
     _airbyte_data->>'clientdetails' AS clientdetails,
-    (_airbyte_data->>'createdat'::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS transaction_createdat_utc2,
-    (_airbyte_data->>'lastmodified'::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS transaction_modifiedat_utc2,
+    ((_airbyte_data->>'createdat')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS transaction_createdat_utc2,
+    ((_airbyte_data->>'lastmodified')::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS transaction_modifiedat_utc2,
     _airbyte_data->>'txntype' AS txntype,
     _airbyte_data->>'transactionstatus' AS transactionstatus,
     _airbyte_data->>'transactionchannel' AS transactionchannel,
@@ -43,9 +45,8 @@ SELECT
         WHEN _airbyte_data->>'txntype' NOT LIKE '%FEES' OR _airbyte_data->>'txntype' = 'TransactionTypes_CREATE-VCN_FEES' THEN false
         ELSE true
     END AS is_fees
-
-FROM {{ source('axis_core', '_airbyte_raw_transactiondetails')}} src
-
+FROM
+    {{ source('axis_core', '_airbyte_raw_transactiondetails') }} src
 {% if is_incremental() and table_exists %}
     WHERE src._airbyte_emitted_at > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'transactions_dimension') }}), '1900-01-01'::timestamp)
 {% endif %}
