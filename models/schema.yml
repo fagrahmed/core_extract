@@ -4,64 +4,11 @@ models:
       contract:
         enforced: true
     columns:
-      - name: id
-        data_type: text
-        constraints:
-          - type: not_null
-          - type: primary_key
-      - name: random_now
-        data_type: text
-      - name: no_random_now
-        data_type: text
-      - name: random
-        data_type: text
-      - name: now
-        data_type: text
+      
       - name: currentflag
         data_type: BOOLEAN
-      - name: random_now
-        data_type: text
-      - name: no_random_now
-        data_type: text
-      - name: random
-        data_type: text
-      - name: now
-        data_type: text
-      - name: expdate
-        data_type: TIMESTAMPTZ
-      - name: hash_column
-        data_type: TEXT
-      - name: loaddate
-        data_type: TIMESTAMP
+
       - name: operation
-        data_type: TEXT
-      - name: partnerid
-        data_type: TEXT
-      - name: profileid
-        data_type: TEXT
-      - name: wallet_activatedat_utc2
-        data_type: TIMESTAMP
-      - name: wallet_createdat_utc2
-        data_type: TIMESTAMP
-      - name: wallet_lasttxnts_utc2
-        data_type: TIMESTAMP
-      - name: wallet_modifiedat_utc2
-        data_type: TIMESTAMP
-      - name: wallet_reactivatedat_utc2
-        data_type: TIMESTAMP
-      - name: wallet_status
-        data_type: TEXT
-      - name: wallet_suspendedat_utc2
-        data_type: TIMESTAMP
-      - name: wallet_type
-        data_type: TEXT
-      - name: wallet_unregisteredat_utc2
-        data_type: TIMESTAMP
-      - name: wallet_unsuspendedat_utc2
-        data_type: TIMESTAMP
-      - name: walletid
-        data_type: TEXT
-      - name: walletnumber
         data_type: TEXT
 
   - name: stg_wallets_2
