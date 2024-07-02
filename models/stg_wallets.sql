@@ -5,7 +5,14 @@
 )}}
 
 
+{% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'wallets_dimension')" %}
+{% set table_exists_result = run_query(table_exists_query) %}
+{% set table_exists = table_exists_result.rows[0][0] if table_exists_result and table_exists_result.rows else False %}
 
+{% set stg_table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'stg_wallets')" %}
+{% set stg_table_exists_result = run_query(stg_table_exists_query) %}
+{% set stg_table_exists = stg_table_exists_result.rows[0][0] if stg_table_exists_result.rows else False %}
+    
 SELECT
     md5(
         COALESCE(_airbyte_data->>'walletid', '') || '-' || 
