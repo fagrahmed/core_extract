@@ -9,8 +9,24 @@ models:
         constraints:
           - type: not_null
           - type: primary_key
+      - name: random_now
+        data_type: text
+      - name: no_random_now
+        data_type: text
+      - name: random
+        data_type: text
+      - name: now
+        data_type: text
       - name: currentflag
         data_type: BOOLEAN
+      - name: random_now
+        data_type: text
+      - name: no_random_now
+        data_type: text
+      - name: random
+        data_type: text
+      - name: now
+        data_type: text
       - name: expdate
         data_type: TIMESTAMPTZ
       - name: hash_column
@@ -51,7 +67,7 @@ models:
   - name: stg_wallets_2
     depends_on:
       - ref('stg_wallets')
-      
+
   - name: wallets_dimension
     config:
       contract:
@@ -171,4 +187,3 @@ models:
         data_type: TEXT
       - name: walletdetailsid
         data_type: TEXT
-        
