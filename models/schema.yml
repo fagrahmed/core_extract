@@ -62,14 +62,6 @@ models:
         constraints:
           - type: not_null
           - type: primary_key
-      - name: random_now
-        data_type: text
-      - name: no_random_now
-        data_type: text
-      - name: random
-        data_type: text
-      - name: now
-        data_type: text
       - name: currentflag
         data_type: BOOLEAN
       - name: expdate
