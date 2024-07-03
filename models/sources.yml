@@ -3,9 +3,9 @@ version: 2
 sources:
   - name: axis_core
     tables:
-      - name: _airbyte_raw_walletdetails
-      - name: _airbyte_raw_transactiondetails
-      - name: _airbyte_raw_walletprofiles
+      - name: walletdetails
+      - name: transactiondetails
+      - name: walletprofiles
       
 
   - name: dbt-dimensions
