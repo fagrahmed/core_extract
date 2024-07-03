@@ -1,5 +1,5 @@
 models:
-  - name: stg_wallets
+  - name: inc_stg_wallets
     config:
       contract:
         enforced: true
@@ -48,11 +48,11 @@ models:
       - name: walletnumber
         data_type: TEXT
 
-  - name: stg_wallets_2
+  - name: inc_stg_wallets_2
     depends_on:
-      - ref('stg_wallets')
+      - ref('inc_stg_wallets')
 
-  - name: wallets_dimension
+  - name: inc_wallets_dimension
     config:
       contract:
         enforced: true
@@ -101,7 +101,7 @@ models:
       - name: walletnumber
         data_type: TEXT 
           
-  - name: transactions_dimension
+  - name: inc_transactions_dimension
     config:
       contract:
         enforced: true
