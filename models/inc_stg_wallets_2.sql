@@ -2,11 +2,11 @@
 {{ config(
     materialized='incremental',
     unique_key= ['walletid', 'walletnumber'],
-    depends_on=['stg_wallets'],
+    depends_on=['inc_stg_wallets'],
     on_schema_change='create'
 )}}
 
-{% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'wallets_dimension')" %}
+{% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'inc_wallets_dimension')" %}
 {% set table_exists_result = run_query(table_exists_query) %}
 {% set table_exists = table_exists_result.rows[0][0] if table_exists_result and table_exists_result.rows else False %}
 
@@ -89,8 +89,8 @@ with update_old as (
         END AS partnerid,
         (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate  
 
-    FROM {{ source('dbt-dimensions', 'stg_wallets') }} stg
-    JOIN {{ source('dbt-dimensions', 'wallets_dimension')}} final
+    FROM {{ source('dbt-dimensions', 'inc_stg_wallets') }} stg
+    JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension')}} final
         ON stg.walletid = final.walletid AND stg.walletnumber = final.walletnumber
     WHERE final.hash_column is not null and final.operation != 'exp'
         AND stg.loaddate > final.loaddate
@@ -101,6 +101,6 @@ SELECT * from update_old
 {% else %}
 
 SELECT *
-FROM {{ ref('stg_wallets') }} stg
+FROM {{ ref('inc_stg_wallets') }} stg
 WHERE stg.loaddate > '2050-01-01'::timestamptz
 {% endif %}
