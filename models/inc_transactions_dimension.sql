@@ -1,10 +1,14 @@
 -- models/transactions_dimension.sql
-{{ config(materialized='incremental',
+{{ 
+    config(materialized='incremental',
     unique_key= ['txndetailsid'],
-    on_schema_change='fail') }}
-{% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'transactions_dimension')" %}
+    on_schema_change='fail') 
+}}
+    
+{% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'inc_transactions_dimension')" %}
 {% set table_exists_result = run_query(table_exists_query) %}
 {% set table_exists = table_exists_result.rows[0][0] if table_exists_result and table_exists_result.rows else False %}
+    
 SELECT
     md5(random()::text || '-' || COALESCE(txndetailsid, '') || '-' || COALESCE(walletdetailsid, '') || '-' || COALESCE(lastmodified::text, '') || '-' || now()::text) AS id,
     'insert' AS operation,
@@ -41,5 +45,5 @@ SELECT
 
 FROM {{ source('axis_core', 'transactiondetails')}} src
 {% if is_incremental() and table_exists %}
-    WHERE src._airbyte_emitted_at > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'transactions_dimension') }}), '1900-01-01'::timestamp)
+    WHERE src._airbyte_emitted_at > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'inc_transactions_dimension') }}), '1900-01-01'::timestamp)
 {% endif %}
