@@ -10,7 +10,7 @@ sources:
 
   - name: dbt-dimensions
     tables:
-      - name: transactions_dimension
-      - name: stg_wallets
-      - name: stg_wallets_2
-      - name: wallets_dimension
+      - name: inc_transactions_dimension
+      - name: inc_stg_wallets
+      - name: inc_stg_wallets_2
+      - name: inc_wallets_dimension
