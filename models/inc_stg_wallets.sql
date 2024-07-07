@@ -1,7 +1,10 @@
 {{ config(
     materialized='incremental',
     unique_key= ['walletid', 'walletnumber'],
-    on_schema_change='append_new_columns'
+    on_schema_change='append_new_columns',
+    pre_hook=[
+        "{% if target.schema == 'dbt-dimensions' and source('dbt-dimensions', 'inc_stg_wallets') is not none %}TRUNCATE TABLE {{ source('dbt-dimensions', 'inc_stg_wallets') }};{% endif %}"
+    ]
 )}}
     
 {% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'inc_wallets_dimension')" %}
@@ -42,5 +45,7 @@ SELECT
 FROM
     {{ source('axis_core', 'walletdetails') }} src
 {% if is_incremental() and table_exists and stg_table_exists %}
-    WHERE src._airbyte_emitted_at > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'inc_wallets_dimension') }}), '1900-01-01'::timestamp)
+    WHERE COALESCE((SELECT max(_airbyte_emitted_at::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') FROM {{ source('axis_core', 'walletdetails') }}), 
+        (SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'inc_wallets_dimension') }}))
+            > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'inc_wallets_dimension') }}), '1900-01-01'::timestamp)
 {% endif %}
