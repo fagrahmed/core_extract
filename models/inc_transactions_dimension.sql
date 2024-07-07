@@ -1,9 +1,10 @@
 -- models/transactions_dimension.sql
 {{ 
-    config(materialized='incremental',
-    unique_key= ['txndetailsid'],
-    on_schema_change='fail') 
-}}
+    config(
+        materialized='incremental',
+        unique_key= ['txndetailsid'],
+        on_schema_change='fail'
+) }}
     
 {% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'inc_transactions_dimension')" %}
 {% set table_exists_result = run_query(table_exists_query) %}
@@ -41,9 +42,7 @@ SELECT
         ELSE true
     END AS is_fees
 
-
-
 FROM {{ source('axis_core', 'transactiondetails')}} src
 {% if is_incremental() and table_exists %}
-    WHERE src._airbyte_emitted_at > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'inc_transactions_dimension') }}), '1900-01-01'::timestamp)
+    WHERE (src._airbyte_emitted_at::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'inc_transactions_dimension') }}), '1900-01-01'::timestamp)
 {% endif %}
