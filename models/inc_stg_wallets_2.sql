@@ -14,7 +14,7 @@
 
 with update_old as (
     SELECT
-        stg.id AS id,
+        final.id AS id,
         CASE
             WHEN final.hash_column IS NOT NULL AND final.hash_column = stg.hash_column AND final.operation = 'insert' THEN 'update'
             ELSE 'exp'
