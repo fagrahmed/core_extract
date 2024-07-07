@@ -45,7 +45,6 @@ SELECT
 FROM
     {{ source('axis_core', 'walletdetails') }} src
 {% if is_incremental() and table_exists and stg_table_exists %}
-    WHERE COALESCE((SELECT max(_airbyte_emitted_at::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') FROM {{ source('axis_core', 'walletdetails') }}), 
-        (SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'inc_wallets_dimension') }}))
+    WHERE (_airbyte_emitted_at::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours')
             > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'inc_wallets_dimension') }}), '1900-01-01'::timestamp)
 {% endif %}
