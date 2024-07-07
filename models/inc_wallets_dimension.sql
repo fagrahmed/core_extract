@@ -4,11 +4,7 @@
     config(
         materialized="incremental",
         unique_key= "hash_column",
-        on_schema_change='fail',
-        post_hook="
-            DROP TABLE IF EXISTS inc_stg_wallets;
-            DROP TABLE IF EXISTS inc_stg_wallets_2;
-            "
+        on_schema_change='fail'
     )
 }}
 
