@@ -5,7 +5,7 @@
     depends_on=['inc_wallets_stg'],
     on_schema_change='append_new_columns',
     pre_hook=[
-        "{% if target.schema == 'dbt-dimensions' and source('dbt-dimensions', 'inc_stg_wallets_update') is not none %}TRUNCATE TABLE {{ source('dbt-dimensions', 'inc_stg_wallets_update') }};{% endif %}"
+        "{% if target.schema == 'dbt-dimensions' and source('dbt-dimensions', 'inc_wallets_stg_update') is not none %}TRUNCATE TABLE {{ source('dbt-dimensions', 'inc_wallets_stg_update') }};{% endif %}"
     ]
 )}}
 
