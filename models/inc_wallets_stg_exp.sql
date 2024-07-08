@@ -3,10 +3,7 @@
     materialized='incremental',
     unique_key= ['walletid', 'walletnumber'],
     depends_on=['inc_wallets_stg'],
-    on_schema_change='append_new_columns',
-    pre_hook=[
-        "{% if target.schema == 'dbt-dimensions' and source('dbt-dimensions', 'inc_wallets_stg_exp') is not none %}TRUNCATE TABLE {{ source('dbt-dimensions', 'inc_wallets_stg_exp') }};{% endif %}"
-    ]
+    on_schema_change='append_new_columns'
 )}}
 
 {% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'inc_wallets_dimension')" %}
