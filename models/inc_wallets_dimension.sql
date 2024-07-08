@@ -9,19 +9,22 @@
 }}
 
 with step_1 as (
-    select stg.*
-    from {{ ref("inc_stg_wallets") }} stg 
-    left join {{ ref("inc_stg_wallets_2")}} stg2 on stg.hash_column = stg2.hash_column
-    where stg2.hash_column is null
+    select *
+    from {{ ref("inc_wallets_stg_new") }} 
 
     union 
 
     select *
-    from {{ref("inc_stg_wallets_2")}}
+    from {{ref("inc_wallets_stg_update")}}
+
+    union 
+
+    select *
+    from {{ref("inc_wallets_stg_exp")}}
 )
 
 {%if is_incremental() %}
-/* Exclude records that already exist in the destination table */
+/* Exclude records that already exist in the destination table to remove old entries for update and exp*/
 , step_2 as(
     select 
         new_records.*

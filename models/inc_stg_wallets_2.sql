@@ -92,7 +92,7 @@ with update_old as (
         END AS partnerid,
         (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate  
 
-    FROM {{ source('dbt-dimensions', 'inc_stg_wallets') }} stg
+    FROM {{ source('dbt-dimensions', 'inc_wallets_stg') }} stg
     JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension')}} final
         ON stg.walletid = final.walletid AND stg.walletnumber = final.walletnumber
     WHERE final.hash_column is not null and final.operation != 'exp'
@@ -104,6 +104,6 @@ SELECT * from update_old
 {% else %}
 
 SELECT *
-FROM {{ ref('inc_stg_wallets') }} stg
+FROM {{ ref('inc_wallets_stg') }} stg
 WHERE stg.loaddate > '2050-01-01'::timestamptz
 {% endif %}

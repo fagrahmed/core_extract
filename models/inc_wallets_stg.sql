@@ -3,7 +3,7 @@
     unique_key= ['walletid', 'walletnumber'],
     on_schema_change='append_new_columns',
     pre_hook=[
-        "{% if target.schema == 'dbt-dimensions' and source('dbt-dimensions', 'inc_stg_wallets') is not none %}TRUNCATE TABLE {{ source('dbt-dimensions', 'inc_stg_wallets') }};{% endif %}"
+        "{% if target.schema == 'dbt-dimensions' and source('dbt-dimensions', 'inc_wallets_stg') is not none %}TRUNCATE TABLE {{ source('dbt-dimensions', 'inc_wallets_stg') }};{% endif %}"
     ]
 )}}
     
@@ -11,9 +11,10 @@
 {% set table_exists_result = run_query(table_exists_query) %}
 {% set table_exists = table_exists_result.rows[0][0] if table_exists_result and table_exists_result.rows else False %}
     
-{% set stg_table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'inc_stg_wallets')" %}
+{% set stg_table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'inc_wallets_stg')" %}
 {% set stg_table_exists_result = run_query(stg_table_exists_query) %}
 {% set stg_table_exists = stg_table_exists_result.rows[0][0] if stg_table_exists_result and stg_table_exists_result.rows else False %}
+
 SELECT
     md5( COALESCE(walletid, '') || '-' || COALESCE(walletnumber, '') || '-' || COALESCE(lastmodified::text, '') || '-' || (now()::timestamptz)::text)
     AS id,
