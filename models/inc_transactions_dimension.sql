@@ -3,7 +3,7 @@
     config(
         materialized='incremental',
         unique_key= ['txndetailsid'],
-        on_schema_change='fail'
+        on_schema_change='append_new_columns'
 ) }}
     
 {% set table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'inc_transactions_dimension')" %}
@@ -18,8 +18,9 @@ SELECT
     txndetailsid,
     walletdetailsid,
     clientdetails,
-    (createdat::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS transaction_createdat_utc2,
-    (lastmodified::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS transaction_modifiedat_utc2,
+    (createdat::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS transaction_createdat_local,
+    (lastmodified::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS transaction_modifiedat_local,
+    3 as utc,
     txntype,
     transactionstatus,
     transactionchannel,

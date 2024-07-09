@@ -23,26 +23,28 @@ models:
         data_type: TEXT
       - name: profileid
         data_type: TEXT
-      - name: wallet_activatedat_utc2
+      - name: wallet_activatedat_local
         data_type: TIMESTAMP
-      - name: wallet_createdat_utc2
+      - name: wallet_createdat_local
         data_type: TIMESTAMP
-      - name: wallet_lasttxnts_utc2
+      - name: wallet_lasttxnts_local
         data_type: TIMESTAMP
-      - name: wallet_modifiedat_utc2
+      - name: wallet_modifiedat_local
         data_type: TIMESTAMP
-      - name: wallet_reactivatedat_utc2
+      - name: wallet_reactivatedat_local
         data_type: TIMESTAMP
       - name: wallet_status
         data_type: TEXT
-      - name: wallet_suspendedat_utc2
+      - name: wallet_suspendedat_local
         data_type: TIMESTAMP
       - name: wallet_type
         data_type: TEXT
-      - name: wallet_unregisteredat_utc2
+      - name: wallet_unregisteredat_local
         data_type: TIMESTAMP
-      - name: wallet_unsuspendedat_utc2
+      - name: wallet_unsuspendedat_local
         data_type: TIMESTAMP
+      - name: utc
+        data_type: int
       - name: walletid
         data_type: TEXT
       - name: walletnumber
@@ -72,26 +74,28 @@ models:
         data_type: TEXT
       - name: profileid
         data_type: TEXT
-      - name: wallet_activatedat_utc2
+      - name: wallet_activatedat_local
         data_type: TIMESTAMP
-      - name: wallet_createdat_utc2
+      - name: wallet_createdat_local
         data_type: TIMESTAMP
-      - name: wallet_lasttxnts_utc2
+      - name: wallet_lasttxnts_local
         data_type: TIMESTAMP
-      - name: wallet_modifiedat_utc2
+      - name: wallet_modifiedat_local
         data_type: TIMESTAMP
-      - name: wallet_reactivatedat_utc2
+      - name: wallet_reactivatedat_local
         data_type: TIMESTAMP
       - name: wallet_status
         data_type: TEXT
-      - name: wallet_suspendedat_utc2
+      - name: wallet_suspendedat_local
         data_type: TIMESTAMP
       - name: wallet_type
         data_type: TEXT
-      - name: wallet_unregisteredat_utc2
+      - name: wallet_unregisteredat_local
         data_type: TIMESTAMP
-      - name: wallet_unsuspendedat_utc2
+      - name: wallet_unsuspendedat_local
         data_type: TIMESTAMP
+      - name: utc
+        data_type: int
       - name: walletid
         data_type: TEXT
       - name: walletnumber
@@ -121,26 +125,28 @@ models:
         data_type: TEXT
       - name: profileid
         data_type: TEXT
-      - name: wallet_activatedat_utc2
+      - name: wallet_activatedat_local
         data_type: TIMESTAMP
-      - name: wallet_createdat_utc2
+      - name: wallet_createdat_local
         data_type: TIMESTAMP
-      - name: wallet_lasttxnts_utc2
+      - name: wallet_lasttxnts_local
         data_type: TIMESTAMP
-      - name: wallet_modifiedat_utc2
+      - name: wallet_modifiedat_local
         data_type: TIMESTAMP
-      - name: wallet_reactivatedat_utc2
+      - name: wallet_reactivatedat_local
         data_type: TIMESTAMP
       - name: wallet_status
         data_type: TEXT
-      - name: wallet_suspendedat_utc2
+      - name: wallet_suspendedat_local
         data_type: TIMESTAMP
       - name: wallet_type
         data_type: TEXT
-      - name: wallet_unregisteredat_utc2
+      - name: wallet_unregisteredat_local
         data_type: TIMESTAMP
-      - name: wallet_unsuspendedat_utc2
+      - name: wallet_unsuspendedat_local
         data_type: TIMESTAMP
+      - name: utc
+        data_type: int
       - name: walletid
         data_type: TEXT
       - name: walletnumber
@@ -170,26 +176,28 @@ models:
         data_type: TEXT
       - name: profileid
         data_type: TEXT
-      - name: wallet_activatedat_utc2
+      - name: wallet_activatedat_local
         data_type: TIMESTAMP
-      - name: wallet_createdat_utc2
+      - name: wallet_createdat_local
         data_type: TIMESTAMP
-      - name: wallet_lasttxnts_utc2
+      - name: wallet_lasttxnts_local
         data_type: TIMESTAMP
-      - name: wallet_modifiedat_utc2
+      - name: wallet_modifiedat_local
         data_type: TIMESTAMP
-      - name: wallet_reactivatedat_utc2
+      - name: wallet_reactivatedat_local
         data_type: TIMESTAMP
       - name: wallet_status
         data_type: TEXT
-      - name: wallet_suspendedat_utc2
+      - name: wallet_suspendedat_local
         data_type: TIMESTAMP
       - name: wallet_type
         data_type: TEXT
-      - name: wallet_unregisteredat_utc2
+      - name: wallet_unregisteredat_local
         data_type: TIMESTAMP
-      - name: wallet_unsuspendedat_utc2
+      - name: wallet_unsuspendedat_local
         data_type: TIMESTAMP
+      - name: utc
+        data_type: int
       - name: walletid
         data_type: TEXT
       - name: walletnumber
@@ -223,26 +231,28 @@ models:
         data_type: TEXT
       - name: profileid
         data_type: TEXT
-      - name: wallet_activatedat_utc2
+      - name: wallet_activatedat_local
         data_type: TIMESTAMP
-      - name: wallet_createdat_utc2
+      - name: wallet_createdat_local
         data_type: TIMESTAMP
-      - name: wallet_lasttxnts_utc2
+      - name: wallet_lasttxnts_local
         data_type: TIMESTAMP
-      - name: wallet_modifiedat_utc2
+      - name: wallet_modifiedat_local
         data_type: TIMESTAMP
-      - name: wallet_reactivatedat_utc2
+      - name: wallet_reactivatedat_local
         data_type: TIMESTAMP
       - name: wallet_status
         data_type: TEXT
-      - name: wallet_suspendedat_utc2
+      - name: wallet_suspendedat_local
         data_type: TIMESTAMP
       - name: wallet_type
         data_type: TEXT
-      - name: wallet_unregisteredat_utc2
+      - name: wallet_unregisteredat_local
         data_type: TIMESTAMP
-      - name: wallet_unsuspendedat_utc2
+      - name: wallet_unsuspendedat_local
         data_type: TIMESTAMP
+      - name: utc
+        data_type: int
       - name: walletid
         data_type: TEXT
       - name: walletnumber
@@ -290,10 +300,12 @@ models:
         data_type: TEXT
       - name: service_fees
         data_type: FLOAT
-      - name: transaction_createdat_utc2
+      - name: transaction_createdat_local
         data_type: TIMESTAMP
-      - name: transaction_modifiedat_utc2
+      - name: transaction_modifiedat_local
         data_type: TIMESTAMP
+      - name: utc
+        data_type: int
       - name: transactionaction
         data_type: TEXT
       - name: transactionchannel
