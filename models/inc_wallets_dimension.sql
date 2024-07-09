@@ -89,7 +89,7 @@ with upd_exp_rec as (
 		old_rec.partnerid,
 		old_rec.loaddate
 	
-	from {{ ref("inc_wallets_dimension")}} as old_rec
+	from {{ this }} as old_rec
 	left join upd_exp_rec on old_rec.id = upd_exp_rec.id
 	where upd_exp_rec.id is null 
 			
