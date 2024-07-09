@@ -18,8 +18,8 @@ SELECT
     txndetailsid,
     walletdetailsid,
     clientdetails,
-    (createdat::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS transaction_createdat_utc2,
-    (lastmodified::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS transaction_modifiedat_utc2,
+    (createdat::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS transaction_createdat_utc2,
+    (lastmodified::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS transaction_modifiedat_utc2,
     txntype,
     transactionstatus,
     transactionchannel,
@@ -36,7 +36,7 @@ SELECT
     hasservicefees,
     transactionreference,
     isreversedflag,
-    (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate,
+    (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS loaddate,
     CASE
         WHEN txntype NOT LIKE '%FEES' OR txntype = 'TransactionTypes_CREATE-VCN_FEES' THEN false
         ELSE true
@@ -44,5 +44,5 @@ SELECT
 
 FROM {{ source('axis_core', 'transactiondetails')}} src
 {% if is_incremental() and table_exists %}
-    WHERE (src._airbyte_emitted_at::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'inc_transactions_dimension') }}), '1900-01-01'::timestamp)
+    WHERE (src._airbyte_emitted_at::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') > COALESCE((SELECT max(loaddate::timestamptz) FROM {{ source('dbt-dimensions', 'inc_transactions_dimension') }}), '1900-01-01'::timestamp)
 {% endif %}

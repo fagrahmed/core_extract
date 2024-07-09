@@ -36,7 +36,7 @@ with update_old as (
         stg.wallet_status,
         stg.profileid,
         stg.partnerid,
-        (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate  
+        (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS loaddate  
 
     FROM {{ source('dbt-dimensions', 'inc_wallets_stg') }} stg
     JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension')}} final

@@ -20,7 +20,7 @@ SELECT
     final.id AS id,
     'exp' AS operation,
     false AS currentflag,
-    (now()::timestamp AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS expdate,
+    (now()::timestamp AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS expdate,
     stg.walletid,
     stg.walletnumber,
     stg.hash_column,
@@ -36,7 +36,7 @@ SELECT
     stg.wallet_status,
     stg.profileid,
     stg.partnerid,
-    (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS loaddate  
+    (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS loaddate  
 
 FROM {{ source('dbt-dimensions', 'inc_wallets_stg') }} stg
 JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension')}} final
