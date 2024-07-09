@@ -41,8 +41,8 @@ SELECT
     stg.loaddate
 
 FROM {{ source('dbt-dimensions', 'inc_wallets_stg') }} stg
-LEFT JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension') }} dim ON stg.wallet_id = dim.wallet_id
-WHERE dim.wallet_id IS NULL
+LEFT JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension') }} dim ON stg.walletid = dim.walletid
+WHERE dim.walletid IS NULL
 
 {% else %}
 

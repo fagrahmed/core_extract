@@ -20,7 +20,7 @@ SELECT
     final.id AS id,
     'exp' AS operation,
     false AS currentflag,
-    (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS expdate,
+    (now()::timestamp AT TIME ZONE 'UTC' + INTERVAL '2 hours') AS expdate,
     stg.walletid,
     stg.walletnumber,
     stg.hash_column,
