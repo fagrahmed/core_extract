@@ -254,9 +254,18 @@ models:
       - name: walletnumber
         data_type: TEXT
 
-  - name: inc_stg_wallets_2
+  - name: inc_wallets_stg_no_change
+    depends_on:
+      - ref('inc_wallets_stg_update')
+      - ref('inc_wallets_stg_exp')
+
+  - name: inc_wallets_dimension
     depends_on:
       - ref('inc_wallets_stg')
+      - ref('inc_wallets_stg_new')
+      - ref('inc_wallets_stg_update')
+      - ref('inc_wallets_stg_exp')
+      - ref('inc_wallets_stg_no_change')
 
   - name: inc_wallets_dimension
     config:
