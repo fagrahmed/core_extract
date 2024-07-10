@@ -5,7 +5,7 @@
         materialized="incremental",
         unique_key= "hash_column",
         on_schema_change='append_new_columns',
-		depends_on=['inc_wallets_stg_no_change', 'inc_wallets_stg_update', 'inc_wallets_stg_exp', 'inc_wallets_stg_new', 'inc_wallets_stg']
+		depends_on=[ref('inc_wallets_stg_no_change'), ref('inc_wallets_stg_update'), ref('inc_wallets_stg_exp'), ref('inc_wallets_stg_new'), ref('inc_wallets_stg')]
     )
 }}
 
