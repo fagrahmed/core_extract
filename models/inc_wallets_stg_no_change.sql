@@ -4,7 +4,8 @@
     config(
         materialized="incremental",
         unique_key= "hash_column",
-        on_schema_change='append_new_columns'
+        on_schema_change='append_new_columns',
+        depends_on=['inc_wallets_stg_update', 'inc_wallets_stg_exp']
     )
 }}
 
