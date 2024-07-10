@@ -12,11 +12,9 @@
 {% set table_exists_result = run_query(table_exists_query) %}
 {% set table_exists = table_exists_result.rows[0][0] if table_exists_result and table_exists_result.rows else False %}
     
-{% set stg_table_exists_query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'dbt-dimensions' AND table_name = 'inc_wallets_stg_new')" %}
-{% set stg_table_exists_result = run_query(stg_table_exists_query) %}
-{% set stg_table_exists = stg_table_exists_result.rows[0][0] if stg_table_exists_result and stg_table_exists_result.rows else False %}
 
 {% if table_exists %}
+-- dimension exists, get only new records; new id(new entry) , or hash_column is different(exp entry's new values)
 
 SELECT 
     stg.id,
@@ -43,9 +41,11 @@ SELECT
 
 FROM {{ source('dbt-dimensions', 'inc_wallets_stg') }} stg
 LEFT JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension') }} dim ON stg.walletid = dim.walletid
-WHERE dim.walletid IS NULL
+WHERE dim.walletid IS NULL OR dim.hash_column != stg.hash_column
+
 
 {% else %}
+-- dimension doesnt exists so all is new
 
 SELECT 
     stg.id,
