@@ -5,7 +5,7 @@
         materialized="incremental",
         unique_key= "hash_column",
         on_schema_change='append_new_columns',
-		incremental_strategy = 'merge',
+		incremental_strategy = 'merge'
     )
 }}
 
