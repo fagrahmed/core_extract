@@ -95,7 +95,7 @@ WITH upd_exp_rec AS (
 		old_rec.partnerid,
 		old_rec.loaddate
 	
-	FROM {{ this }} AS old_rec
+	FROM {{ source('dbt-dimensions', 'inc_wallets_dimensions') }} AS old_rec
 	LEFT JOIN upd_exp_rec ON old_rec.id = upd_exp_rec.id
 	WHERE upd_exp_rec.id IS NULL
 			
