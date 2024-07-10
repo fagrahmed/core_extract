@@ -32,8 +32,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   enabled: true
-  - name: inc_wallets_dimensions
-    config:
-      materialized: incremental
-      unique_key: id
-      incremental_strategy: merge
+    dbt_axis_core:
+      inc_wallets_dimensions:
+        materialized: incremental
+        unique_key: id
+        incremental_strategy: merge
