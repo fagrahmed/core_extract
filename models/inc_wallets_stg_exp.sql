@@ -21,22 +21,22 @@ SELECT
     'exp' AS operation,
     false AS currentflag,
     (now()::timestamp AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS expdate,
-    stg.walletid,
-    stg.walletnumber,
-    stg.hash_column,
-    stg.wallet_createdat_local,
-    stg.wallet_modifiedat_local,
-    stg.wallet_suspendedat_local,
-    stg.wallet_unsuspendedat_local,
-    stg.wallet_unregisteredat_local,
-    stg.wallet_activatedat_local,
-    stg.wallet_reactivatedat_local,
-    stg.wallet_lasttxnts_local,
-    stg.utc,
-    stg.wallet_type,
-    stg.wallet_status,
-    stg.profileid,
-    stg.partnerid,
+    final.walletid,
+    final.walletnumber,
+    final.hash_column,
+    final.wallet_createdat_local,
+    final.wallet_modifiedat_local,
+    final.wallet_suspendedat_local,
+    final.wallet_unsuspendedat_local,
+    final.wallet_unregisteredat_local,
+    final.wallet_activatedat_local,
+    final.wallet_reactivatedat_local,
+    final.wallet_lasttxnts_local,
+    final.utc,
+    final.wallet_type,
+    final.wallet_status,
+    final.profileid,
+    final.partnerid,
     (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS loaddate  
 
 FROM {{ source('dbt-dimensions', 'inc_wallets_stg') }} stg
@@ -46,7 +46,7 @@ WHERE stg.loaddate > final.loaddate AND stg.hash_column != final.hash_column
 
 
 {% else %}
-
+-- do nothing (extremely high comparison date)
 SELECT 
     stg.id,
     stg.operation,
