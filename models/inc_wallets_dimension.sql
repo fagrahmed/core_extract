@@ -3,7 +3,7 @@
 {{
     config(
         materialized="incremental",
-        unique_key= "hash_column",
+        unique_key= ["hash_column", "id"],
         on_schema_change='append_new_columns',
 	incremental_strategy = 'merge'
 	)
