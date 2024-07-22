@@ -3,9 +3,9 @@
 {{
     config(
         materialized="incremental",
-        unique_key= "id",
+        unique_key= ["hash_column", "id"],
         on_schema_change='append_new_columns',
-		incremental_strategy = 'merge'
+	incremental_strategy = 'merge'
 	)
 }}
 
@@ -19,38 +19,6 @@
 {% set _ = ref('inc_wallets_stg_new') %}
 {% set _ = ref('inc_wallets_stg_no_change') %}
 {% set _ = ref('inc_wallets_stg') %}
-
-{% if table_exists %}
-
-
-select 
-	id,
-	operation,
-	currentflag,
-	expdate,
-	walletid,
-	walletnumber,
-	hash_column,
-	wallet_createdat_local,
-	wallet_modifiedat_local,
-	wallet_suspendedat_local,
-	wallet_unsuspendedat_local,
-	wallet_unregisteredat_local,
-	wallet_activatedat_local,
-	wallet_reactivatedat_local,
-	wallet_lasttxnts_local,
-	utc,
-	wallet_type,
-	wallet_status,
-	profileid,
-	partnerid,
-	loaddate
-
-from {{ref("inc_wallets_stg_no_change")}}
-
-union all
-
-{% endif %}
 
 select 
 	id,
