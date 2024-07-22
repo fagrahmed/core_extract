@@ -41,7 +41,7 @@ SELECT
 
 FROM {{ source('dbt-dimensions', 'inc_wallets_stg') }} stg
 LEFT JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension') }} dim ON stg.walletid = dim.walletid
-WHERE dim.walletid IS NULL OR (dim.hash_column != stg.hash_column AND dim.operation != 'update')
+WHERE dim.walletid IS NULL OR (dim.hash_column != stg.hash_column)
 
 
 {% else %}
