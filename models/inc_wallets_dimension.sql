@@ -17,7 +17,6 @@
 {% set _ = ref('inc_wallets_stg_update') %}
 {% set _ = ref('inc_wallets_stg_exp') %}
 {% set _ = ref('inc_wallets_stg_new') %}
-{% set _ = ref('inc_wallets_stg_no_change') %}
 {% set _ = ref('inc_wallets_stg') %}
 
 select 
