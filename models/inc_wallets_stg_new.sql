@@ -13,6 +13,8 @@
 {% set table_exists = table_exists_result.rows[0][0] if table_exists_result and table_exists_result.rows else False %}
     
 
+{% set _ = ref('inc_wallets_stg_update') %}
+
 {% if table_exists %}
 -- dimension exists, get only new records; new id(new entry) , or hash_column is different(exp entry's new values)
 
