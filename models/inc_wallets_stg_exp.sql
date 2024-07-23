@@ -42,7 +42,7 @@ SELECT
 FROM {{ source('dbt-dimensions', 'inc_wallets_stg') }} stg
 JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension')}} final
     ON stg.walletid = final.walletid AND stg.walletnumber = final.walletnumber
-WHERE stg.loaddate > final.loaddate AND stg.hash_column != final.hash_column
+WHERE stg.loaddate > final.loaddate AND stg.hash_column != final.hash_column AND final.currentflag = true
 
 
 {% else %}
