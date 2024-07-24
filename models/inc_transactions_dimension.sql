@@ -85,5 +85,3 @@ SELECT
     is_fees
 
 FROM {{ source('dbt-dimensions', 'inc_transactions_stg_new') }}
-
-{% endif %}
