@@ -19,7 +19,7 @@ SELECT
     'update' AS operation,
     true AS currentflag,
     null::timestamptz AS expdate,
-    stg.upd_counter + 1 AS upd_counter,
+    final.upd_counter + 1 AS upd_counter,
     stg.txndetailsid,
     stg.walletdetailsid,
     stg.clientdetails,
