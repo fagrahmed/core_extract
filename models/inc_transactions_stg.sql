@@ -20,6 +20,8 @@ SELECT
     clientdetails,
     (createdat::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS transaction_createdat_local,
     (lastmodified::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS transaction_modifiedat_local,
+    (committs::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS transaction_commitat_local,
+    (failedts::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS transaction_failedat_local,
     3 as utc,
     txntype,
     transactionstatus,

@@ -361,6 +361,10 @@ models:
         data_type: TIMESTAMP
       - name: transaction_modifiedat_local
         data_type: TIMESTAMP
+      - name: transaction_commitat_local
+        data_type: TIMESTAMP
+      - name: transaction_failedat_local
+        data_type: TIMESTAMP
       - name: utc
         data_type: int
       - name: transactionaction
@@ -425,6 +429,10 @@ models:
       - name: transaction_createdat_local
         data_type: TIMESTAMP
       - name: transaction_modifiedat_local
+        data_type: TIMESTAMP
+      - name: transaction_commitat_local
+        data_type: TIMESTAMP
+      - name: transaction_failedat_local
         data_type: TIMESTAMP
       - name: utc
         data_type: int
@@ -491,6 +499,10 @@ models:
         data_type: TIMESTAMP
       - name: transaction_modifiedat_local
         data_type: TIMESTAMP
+      - name: transaction_commitat_local
+        data_type: TIMESTAMP
+      - name: transaction_failedat_local
+        data_type: TIMESTAMP
       - name: utc
         data_type: int
       - name: transactionaction
@@ -555,6 +567,10 @@ models:
       - name: transaction_createdat_local
         data_type: TIMESTAMP
       - name: transaction_modifiedat_local
+        data_type: TIMESTAMP
+      - name: transaction_commitat_local
+        data_type: TIMESTAMP
+      - name: transaction_failedat_local
         data_type: TIMESTAMP
       - name: utc
         data_type: int
