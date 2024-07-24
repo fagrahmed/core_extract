@@ -47,8 +47,8 @@ SELECT
     (now()::timestamptz AT TIME ZONE 'UTC' + INTERVAL '3 hours') AS loaddate,
     stg.is_fees
 
-FROM {{ source('dbt-dimensions', 'inc_wallets_stg') }} stg
-JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension')}} final
+FROM {{ source('dbt-dimensions', 'inc_transactions_stg') }} stg
+JOIN {{ source('dbt-dimensions', 'inc_transactions_dimension')}} final
     ON stg.txndetailsid = final.txndetailsid 
 WHERE stg.loaddate > final.loaddate
 

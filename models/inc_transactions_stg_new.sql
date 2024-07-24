@@ -50,7 +50,7 @@ SELECT
 
 FROM {{ source('dbt-dimensions', 'inc_transactions_stg') }} stg
 LEFT JOIN {{ source('dbt-dimensions', 'inc_transactions_dimension') }} dim ON stg.txndetailsid = dim.txndetailsid
-WHERE dim.txndetailsid IS NULL OR (dim.hash_column != stg.hash_column AND dim.currentflag = true)
+WHERE dim.txndetailsid IS NULL 
 
 {% else %}
 -- dimension doesnt exists so all is new
