@@ -379,3 +379,198 @@ models:
         data_type: TEXT
       - name: walletdetailsid
         data_type: TEXT
+
+  - name: inc_transactions_stg
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: id
+        data_type: text
+        constraints:
+          - type: not_null
+          - type: primary_key
+      - name: actual_balance_after
+        data_type: TEXT
+      - name: actual_balance_before
+        data_type: TEXT
+      - name: amount
+        data_type: FLOAT
+      - name: balance_after
+        data_type: FLOAT
+      - name: balance_before
+        data_type: FLOAT
+      - name: clientdetails
+        data_type: JSONB
+      - name: currentflag
+        data_type: BOOLEAN
+      - name: expdate
+        data_type: TIMESTAMPTZ
+      - name: hasservicefees
+        data_type: BOOLEAN
+      - name: interchange_amount
+        data_type: FLOAT
+      - name: interchangeaction
+        data_type: TEXT
+      - name: isreversedflag
+        data_type: BOOLEAN
+      - name: is_fees
+        data_type: BOOLEAN
+      - name: loaddate
+        data_type: TIMESTAMP
+      - name: operation
+        data_type: TEXT
+      - name: service_fees
+        data_type: FLOAT
+      - name: transaction_createdat_local
+        data_type: TIMESTAMP
+      - name: transaction_modifiedat_local
+        data_type: TIMESTAMP
+      - name: utc
+        data_type: int
+      - name: transactionaction
+        data_type: TEXT
+      - name: transactionchannel
+        data_type: TEXT
+      - name: transactiondomain
+        data_type: TEXT
+      - name: transactionreference
+        data_type: TEXT
+      - name: transactionstatus
+        data_type: TEXT
+      - name: txndetailsid
+        data_type: TEXT
+      - name: txntype
+        data_type: TEXT
+      - name: walletdetailsid
+        data_type: TEXT
+  
+  - name: inc_transactions_stg_new
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: id
+        data_type: text
+        constraints:
+          - type: not_null
+          - type: primary_key
+      - name: actual_balance_after
+        data_type: TEXT
+      - name: actual_balance_before
+        data_type: TEXT
+      - name: amount
+        data_type: FLOAT
+      - name: balance_after
+        data_type: FLOAT
+      - name: balance_before
+        data_type: FLOAT
+      - name: clientdetails
+        data_type: JSONB
+      - name: currentflag
+        data_type: BOOLEAN
+      - name: expdate
+        data_type: TIMESTAMPTZ
+      - name: hasservicefees
+        data_type: BOOLEAN
+      - name: interchange_amount
+        data_type: FLOAT
+      - name: interchangeaction
+        data_type: TEXT
+      - name: isreversedflag
+        data_type: BOOLEAN
+      - name: is_fees
+        data_type: BOOLEAN
+      - name: loaddate
+        data_type: TIMESTAMP
+      - name: operation
+        data_type: TEXT
+      - name: service_fees
+        data_type: FLOAT
+      - name: transaction_createdat_local
+        data_type: TIMESTAMP
+      - name: transaction_modifiedat_local
+        data_type: TIMESTAMP
+      - name: utc
+        data_type: int
+      - name: transactionaction
+        data_type: TEXT
+      - name: transactionchannel
+        data_type: TEXT
+      - name: transactiondomain
+        data_type: TEXT
+      - name: transactionreference
+        data_type: TEXT
+      - name: transactionstatus
+        data_type: TEXT
+      - name: txndetailsid
+        data_type: TEXT
+      - name: txntype
+        data_type: TEXT
+      - name: walletdetailsid
+        data_type: TEXT
+
+  - name: inc_transactions_stg_update
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: id
+        data_type: text
+        constraints:
+          - type: not_null
+          - type: primary_key
+      - name: actual_balance_after
+        data_type: TEXT
+      - name: actual_balance_before
+        data_type: TEXT
+      - name: amount
+        data_type: FLOAT
+      - name: balance_after
+        data_type: FLOAT
+      - name: balance_before
+        data_type: FLOAT
+      - name: clientdetails
+        data_type: JSONB
+      - name: currentflag
+        data_type: BOOLEAN
+      - name: expdate
+        data_type: TIMESTAMPTZ
+      - name: hasservicefees
+        data_type: BOOLEAN
+      - name: interchange_amount
+        data_type: FLOAT
+      - name: interchangeaction
+        data_type: TEXT
+      - name: isreversedflag
+        data_type: BOOLEAN
+      - name: is_fees
+        data_type: BOOLEAN
+      - name: loaddate
+        data_type: TIMESTAMP
+      - name: operation
+        data_type: TEXT
+      - name: service_fees
+        data_type: FLOAT
+      - name: transaction_createdat_local
+        data_type: TIMESTAMP
+      - name: transaction_modifiedat_local
+        data_type: TIMESTAMP
+      - name: utc
+        data_type: int
+      - name: transactionaction
+        data_type: TEXT
+      - name: transactionchannel
+        data_type: TEXT
+      - name: transactiondomain
+        data_type: TEXT
+      - name: transactionreference
+        data_type: TEXT
+      - name: transactionstatus
+        data_type: TEXT
+      - name: txndetailsid
+        data_type: TEXT
+      - name: txntype
+        data_type: TEXT
+      - name: walletdetailsid
+        data_type: TEXT

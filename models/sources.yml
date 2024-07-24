@@ -11,6 +11,9 @@ sources:
   - name: dbt-dimensions
     tables:
       - name: inc_transactions_dimension
+      - name: inc_transactions_stg
+      - name: inc_transactions_stg_new
+      - name: inc_transactions_stg_update
 
       - name: inc_wallets_dimension
       - name: inc_wallets_stg
