@@ -367,6 +367,8 @@ models:
         data_type: TIMESTAMP
       - name: utc
         data_type: int
+      - name: upd_counter
+        data_type: int
       - name: transactionaction
         data_type: TEXT
       - name: transactionchannel
@@ -505,6 +507,8 @@ models:
         data_type: TIMESTAMP
       - name: utc
         data_type: int
+      - name: upd_counter
+        data_type: int
       - name: transactionaction
         data_type: TEXT
       - name: transactionchannel
@@ -573,6 +577,8 @@ models:
       - name: transaction_failedat_local
         data_type: TIMESTAMP
       - name: utc
+        data_type: int
+      - name: upd_counter
         data_type: int
       - name: transactionaction
         data_type: TEXT

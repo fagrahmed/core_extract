@@ -2,6 +2,7 @@
 {{ config(
     materialized='incremental',
     unique_key= ['walletid', 'walletnumber'],
+    depends_on=['inc_wallets_stg'],
     on_schema_change='append_new_columns',
     pre_hook=[
         "{% if target.schema == 'dbt-dimensions' and source('dbt-dimensions', 'inc_wallets_stg_new') is not none %}TRUNCATE TABLE {{ source('dbt-dimensions', 'inc_wallets_stg_new') }};{% endif %}"

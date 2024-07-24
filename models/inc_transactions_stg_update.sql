@@ -19,6 +19,7 @@ SELECT
     'update' AS operation,
     true AS currentflag,
     null::timestamptz AS expdate,
+    stg.upd_counter + 1 AS upd_counter,
     stg.txndetailsid,
     stg.walletdetailsid,
     stg.clientdetails,
@@ -52,6 +53,7 @@ JOIN {{ source('dbt-dimensions', 'inc_wallets_dimension')}} final
 WHERE stg.loaddate > final.loaddate
 
 {% else %}
+-- do nothing (extremely high comparison date)
 
 SELECT 
     stg.id,
